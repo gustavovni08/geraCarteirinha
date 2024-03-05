@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import InputContainer from "./InputContainer"
 import { useState } from "react"
-import SelectContainer from "./SelectContainer"
 import ButtonContainer from "../utils/ButtonContainer"
 
 const MainContainer = styled.div`
