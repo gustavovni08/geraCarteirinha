@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import InputMask from 'react-input-mask';
+
 
 const MainContainer = styled.div`
     display:flex;

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import InputMask from 'react-input-mask';
 
 const MainContainer = styled.div`
     display:flex;
@@ -26,7 +25,7 @@ const LabelContainer = styled.div`
 
 function InputContainer(props){
 
-    const {label, mask, placeholder, value, onChange} = props
+    const {label, placeholder, value, onChange} = props
 
     return(
         <MainContainer>
