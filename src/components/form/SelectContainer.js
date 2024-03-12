@@ -38,7 +38,7 @@ function SelectContainer(props){
             value={value}
             onChange={onChange}>
                 {options.map(option => (
-                    <option value={option.value}>
+                    <option key={option.value} value={option.value}>
                         {option.label}
                     </option>
                 ))}

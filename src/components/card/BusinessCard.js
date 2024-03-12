@@ -1,5 +1,5 @@
 import React ,{ useRef } from 'react';
-import card from '../../assets/card.png'
+import card from '../../assets/BusinessCard.png'
 import styled from 'styled-components'
 import ButtonContainer from '../utils/ButtonContainer'
 import html2canvas from 'html2canvas';
@@ -10,6 +10,7 @@ const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #d9d9d9;
 `
 
 const CardContainer = styled.div`
@@ -17,31 +18,61 @@ const CardContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 60px;
 `
 
 const ImageContainer = styled.img`
-    max-width: 500px;
+    width: 400px;
 `
 
-const NomeLabel = styled.p`
+const NomeLabel = styled.div`
     position: relative;
     z-index: 1000;
-    top: -250px;
-    left: -40px;
+    top: -90px;
+    display: flex;
+    justify-content:flex-end;
+    width:70%;
+    font-weight: 600;
+    color:#fff;
+    height:0px;
+    
 `
 
-const CodeLabel = styled.p`
+const CodeLabel = styled.div`
     position: relative;
     z-index: 1000;
-    top: -270px;
-    left: -84px;
+    top: -70px;
+    display: flex;
+    justify-content:flex-end;
+    width:70%;
+    font-weight: 500;
+    color:#fff;
+    height:0px;    
 `
 
-function Card(props){
+const LogoContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    z-index:1000;
+    height:0px;
+    top: -189px;
+    width: 80%;
+
+
+`
+
+const LogoImg = styled.img`
+    max-width: 110px;
+    max-height: 70px;
+`
+
+function BusinessCard(props){
 
     const cardRef = useRef(null);
 
-    const {nome, codigo} = props
+    const {nome, codigo, empresa} = props
 
     const handleDownload = async () => {
         try {
@@ -67,6 +98,10 @@ function Card(props){
                 <ImageContainer src={card} alt='hbcard'/>
                 <NomeLabel>{nome}</NomeLabel>
                 <CodeLabel>{codigo}</CodeLabel>
+                <LogoContainer>
+                    <LogoImg src={require(`../../assets/${empresa}.png`)} alt='logo'/>
+                </LogoContainer>
+                <LogoContainer/>
             </CardContainer>
             
             <ButtonContainer title='Download' onClick={handleDownload}/>
@@ -74,4 +109,4 @@ function Card(props){
     )
 }
 
-export default Card
+export default BusinessCard
