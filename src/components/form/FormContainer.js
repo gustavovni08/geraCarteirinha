@@ -46,7 +46,7 @@ function FormContainer({onClick}){
         { value: 'Veloo', label: 'Veloo'},
         { value: 'Itelx', label: 'Itelx'},
         { value: 'MaisTV', label: 'MaisTV'},
-        { value: 'ATM', label: 'ATM'},
+        { value: 'Sitramico', label: 'Sitramico'},
         { value: 'Colégio Santa Úrsula', label: 'Colégio Santa Úrsula'},
         
     ]
