@@ -54,7 +54,20 @@ function FormContainer({onClick}){
         
     ]
 
+    // function resetNome(string) {
+        
+    //     const palavras = string.split(" ");
+        
+    //     const primeiro = palavras[0];
+    //     const ultimo = palavras[palavras.length - 1];
+        
+    //     return primeiro + ultimo
+    // }
+
     const retornarDadosDoFormulario = () => {
+
+        // const newNome = resetNome(nome)
+
         const formData = {
             nome,
             cpf,

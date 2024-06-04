@@ -51,12 +51,30 @@ const CodeLabel = styled.div`
     height:0px;    
 `
 
+const LogoContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    z-index:1000;
+    height:0px;
+    top: -189px;
+    width: 80%;
+
+
+`
+
+const LogoImg = styled.img`
+    max-width: 110px;
+    max-height: 70px;
+`
+
 
 function PersonalCard(props){
 
     const cardRef = useRef(null);
 
-    const {nome, codigo} = props
+    const {nome, codigo, empresa} = props
 
     const handleDownload = async () => {
         try {
@@ -77,15 +95,37 @@ function PersonalCard(props){
     }
 
     return(
-        <MainContainer>
+
+        <>
+        {!empresa && (
+                        <MainContainer>
+                        <CardContainer ref={cardRef}>
+                            <ImageContainer src={card} alt='hbcard'/>
+                            <NomeLabel>{nome}</NomeLabel>
+                            <CodeLabel>{codigo}</CodeLabel>
+                        </CardContainer>
+                        
+                        <ButtonContainer title='Download' onClick={handleDownload}/>
+                    </MainContainer>
+        )}
+
+        {empresa && (
+            <MainContainer>
             <CardContainer ref={cardRef}>
                 <ImageContainer src={card} alt='hbcard'/>
                 <NomeLabel>{nome}</NomeLabel>
                 <CodeLabel>{codigo}</CodeLabel>
+                <LogoContainer>
+                    <LogoImg src={require(`../../assets/${empresa}.png`)} alt='logo'/>
+                </LogoContainer>
+                <LogoContainer/>
             </CardContainer>
             
             <ButtonContainer title='Download' onClick={handleDownload}/>
         </MainContainer>
+
+        )}
+                </>
     )
 }
 

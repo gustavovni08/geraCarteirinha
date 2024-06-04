@@ -26,7 +26,8 @@ function GeraCarteirinhaIndividual(){
         <div>
         {!showCard && <FormContainer onClick={gerarCarteirinha}/>}
         {showCard && card === 'Individual' && <PersonalCard nome={nome} codigo={codigo}/>}
-        {showCard && card === 'Empresarial' && <BusinessCard nome={nome} codigo={codigo} empresa={empresa}/>}
+        {showCard && card === 'Empresarial' &&  empresa !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={empresa}/>}
+        {showCard && card === 'Empresarial' &&  empresa === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={empresa}/>}
         </div>
     )
 }
