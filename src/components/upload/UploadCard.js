@@ -40,6 +40,7 @@ function UploadCard(){
         { value: 'MaisTV', label: 'MaisTV'},
         { value: 'Sitramico', label: 'Sitramico'},
         { value: 'Colégio Santa Úrsula', label: 'Colégio Santa Úrsula'},
+        { value: 'Sindhal', label: 'Sindhal'},
         { value: 'UPM', label:'UPM'},
         { value: 'Sindprev', label:'Sindprev'},
     ]
