@@ -14,7 +14,10 @@ function GeraCarteirinhaIndividual(){
 
     const gerarCarteirinha = (formData) => {
 
-            setNome(formData.nome.toUpperCase())
+        const nomeLista = formData.nome.split(' ')
+        const newNome = `${nomeLista[0]} ${nomeLista[nomeLista.length-1]}`
+
+            setNome(newNome.toUpperCase())
             setCodigo(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000)
             setCard(formData.tipo)
             setEmpresa(formData.empresa)
