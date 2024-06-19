@@ -14,7 +14,7 @@ function Menu(){
     return(
         <MainContainer>
             <MenuCard
-            title="Individual"
+            title="Individual/Familiar"
             navigate="Individual"/>
             <MenuCard
             title="Em Lote"

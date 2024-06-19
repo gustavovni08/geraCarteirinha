@@ -9,7 +9,8 @@ const MainContainer = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #d9d9d9;
-    height: 700px;
+    height: 100%;
+    padding:30px;
 `
 
 const FormCard = styled.div`
@@ -23,8 +24,10 @@ const FormCard = styled.div`
     background-color: #fff;
     border-radius: 8px; 
 
-    height: 650px;
-    width: 600PX;
+    height: 100%;
+    width: 600px;
+
+    padding-top:40px
 `
 
 function FormContainer({onClick}){
@@ -34,15 +37,19 @@ function FormContainer({onClick}){
     const [email, setEmail] = useState('')
     const [telefone, setTelefone] = useState('')
     const [tipo, setTipo] = useState('Individual')
-    const [empresa, setEmpresa] = useState('Veloo')
+    const [empresa, setEmpresa] = useState('Nenhum')
+    const [qtdDepedentes, setQtdDepedentes] = useState('SELECIONE')
+    const [listaDepedentes, setListaDepedentes] = useState([])
 
     
     const options = [
         { value: 'Individual', label: 'Individual'},
-        { value: 'Empresarial', label: 'Empresarial'}
+        { value: 'Familiar', label: 'Familiar'},
+        { value: 'Empresarial', label: 'Empresarial'},
     ]
 
     const Empresas = [
+        { value: 'SELECIONE', label:'SELECIONE'},
         { value: 'Veloo', label: 'Veloo'},
         { value: 'Itelx', label: 'Itelx'},
         { value: 'MaisTV', label: 'MaisTV'},
@@ -54,19 +61,54 @@ function FormContainer({onClick}){
         
     ]
 
-    // function resetNome(string) {
-        
-    //     const palavras = string.split(" ");
-        
-    //     const primeiro = palavras[0];
-    //     const ultimo = palavras[palavras.length - 1];
-        
-    //     return primeiro + ultimo
+    const multiplier = [
+        {value: 0, label: 'SELECIONE'},
+        {value: 1, label: '1'},
+        {value: 2, label: '2'},
+        {value: 3, label: '3'},
+        {value: 4, label: '4'},
+        {value: 5, label: '5'}
+    ]
+
+    const adicionarCampoDepedentes = (value) => {
+        setQtdDepedentes(value)
+        console.log(value)
+
+        const novosDepdentes = []
+
+
+        for (let i = 0; i < parseInt(value); i++) {
+
+            
+
+            novosDepdentes.push(
+                { id: i * 2 + 1, label:`${i+1}º Nome`, value:''},
+                { id: i *2 + 2, label:`${i+1}º Cpf`, value:''},
+             )
+        }
+
+        setListaDepedentes(novosDepdentes)
+        console.log(listaDepedentes)
+    }
+
+    // const changeDepedenteValue = (event, id) => {
+    //     const updatedDependentes = listaDepedentes.map((item) => {
+    //         item.id === id ? {...item, value: event.target.value} : item
+    //     })
+
+    //     setListaDepedentes(updatedDependentes)
     // }
+
+    const changeDepedenteValue = (event, id) => {
+        const updatedDependentes = listaDepedentes.map((item) =>
+          item.id === id ? { ...item, value: event.target.value } : item
+        );
+    
+        setListaDepedentes(updatedDependentes);
+      };
 
     const retornarDadosDoFormulario = () => {
 
-        // const newNome = resetNome(nome)
 
         const formData = {
             nome,
@@ -75,8 +117,9 @@ function FormContainer({onClick}){
             telefone,
             tipo,
             empresa,
+            listaDepedentes
         }
-
+        // console.log(formData)
         onClick(formData)
     }
 
@@ -115,6 +158,41 @@ function FormContainer({onClick}){
                 options={options}
                 onChange={(event) => (setTipo(event.target.value))}
                 />
+
+                {tipo ==='Familiar' && (
+                    <>
+                    <SelectContainer 
+                    label='Convênio'
+                    value={empresa}
+                    options={Empresas}
+                    onChange={(event) => (setEmpresa(event.target.value))}/>
+
+                    <SelectContainer
+                    label='N° Depedentes'
+                    value={qtdDepedentes}
+                    options={multiplier}
+                    onChange={(event) => (adicionarCampoDepedentes(event.target.value))}
+                    />
+
+                    {listaDepedentes.map((item, index) => {
+                        return(
+                            <InputContainer
+                            key={index}
+                            label={item.label}
+                            value={item.value}
+                            onChange={(event) => changeDepedenteValue(event, item.id)}
+                            />
+                        )
+
+                    })}
+                    
+                    </>
+
+                )
+
+
+  
+                }
 
                 {tipo === 'Empresarial' && 
                 <SelectContainer 
