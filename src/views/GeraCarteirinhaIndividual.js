@@ -33,7 +33,7 @@ function GeraCarteirinhaIndividual(){
         {showCard && card === 'Individual' && <PersonalCard nome={nome} codigo={codigo}/>}
         {showCard && card === 'Empresarial' &&  empresa !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={empresa}/>}
         {showCard && card === 'Empresarial' &&  empresa === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={empresa}/>}
-        {showCard && card === 'Familiar' && empresa=== 'SELECIONE' && (
+        {showCard && card === 'Familiar' && empresa === 'SELECIONE' && (
             <>
             <PersonalCard
             nome={nome}

@@ -37,7 +37,7 @@ function FormContainer({onClick}){
     const [email, setEmail] = useState('')
     const [telefone, setTelefone] = useState('')
     const [tipo, setTipo] = useState('Individual')
-    const [empresa, setEmpresa] = useState('Nenhum')
+    const [empresa, setEmpresa] = useState('SELECIONE')
     const [qtdDepedentes, setQtdDepedentes] = useState('SELECIONE')
     const [listaDepedentes, setListaDepedentes] = useState([])
 
