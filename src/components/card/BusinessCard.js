@@ -1,8 +1,10 @@
-import React ,{ useRef } from 'react';
+import React, {useRef } from 'react';
+import { useEffect } from 'react';
 import card from '../../assets/BusinessCard.png'
 import styled from 'styled-components'
 import ButtonContainer from '../utils/ButtonContainer'
 import html2canvas from 'html2canvas';
+import { useRefContext } from '../../services/context';
 
 
 const MainContainer = styled.div`
@@ -68,11 +70,13 @@ const LogoImg = styled.img`
     max-height: 70px;
 `
 
-function BusinessCard(props){
 
+const BusinessCard = React.forwardRef((props, ref) => {
+    
+    const { nome, codigo, empresa, mostrarBotao } = props;
     const cardRef = useRef(null);
+    const {setReflist, reflist} = useRefContext()
 
-    const {nome, codigo, empresa} = props
 
     const handleDownload = async () => {
         try {
@@ -92,6 +96,10 @@ function BusinessCard(props){
         }
     }
 
+    useEffect(()=>{
+        console.log(reflist)
+    }, [])
+
     return(
         <MainContainer>
             <CardContainer ref={cardRef}>
@@ -103,10 +111,13 @@ function BusinessCard(props){
                 </LogoContainer>
                 <LogoContainer/>
             </CardContainer>
-            
-            <ButtonContainer title='Download' onClick={handleDownload}/>
-        </MainContainer>
-    )
-}
 
-export default BusinessCard
+            {mostrarBotao === true && (
+                <ButtonContainer title='Download' onClick={handleDownload}/>
+            )} 
+            
+        </MainContainer>
+)
+    })
+
+    export default BusinessCard

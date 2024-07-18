@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SelectContainer from "../form/SelectContainer"
 import ButtonContainer from "../utils/ButtonContainer"
 import * as XLSX from 'xlsx';
 import BusinessCard from "../card/BusinessCard";
 import PersonalCard from "../card/Personalcard";
+import { Provider, useRefContext } from "../../services/context";
+
 
 const UploadCardContainer = styled.div`
     display: flex;
@@ -26,8 +28,11 @@ function UploadCard(){
     const [file, setFile] = useState(null)
     const [tipo, setTipo] = useState('Individual')
     const [empresa, setEmpresa] = useState('Veloo')
-    const [lista, setLista] = useState(null)
+    const [lista, setLista] = useState([])
     const [show, setShow] = useState(false)
+   
+    const {reflist, setReflist} = useRefContext()
+
 
     const options = [
         { value: 'Individual', label: 'Individual'},
@@ -54,7 +59,16 @@ function UploadCard(){
                 const sheet = workbook.Sheets[sheetName];
                 const dataJson = XLSX.utils.sheet_to_json(sheet);
 
-                const values = dataJson.map(row => row[Object.keys(row)[0]]);
+                const values = dataJson.map(row => {
+                    const cellValue = row[Object.keys(row)[0]];
+                    if (typeof cellValue === 'string') {
+                        const splitValues = cellValue.split(' ');
+                        if (splitValues.length > 1) {
+                            return splitValues[0] + ' ' + splitValues[splitValues.length - 1];
+                        }
+                    }
+                    return cellValue;
+                });
                 setLista(values);
                 console.log(values);
                 setShow(true)
@@ -68,7 +82,13 @@ function UploadCard(){
         return codigo
     }
 
+    useEffect(()=>{
+        setReflist(lista)
+    }, [])
+
+
     return(
+        <Provider>
         <div>
             { !show && (<UploadCardContainer>
             <SelectContainer
@@ -108,12 +128,24 @@ function UploadCard(){
         )}
 
         {show && tipo === 'Empresarial' && (
-            lista.map((item, index) => (
-            <BusinessCard key={index} nome={item} codigo={gerarCodigo()} empresa={empresa} />
-            ))
+            <>
+                {lista.map((item, index) => (
+                    <BusinessCard 
+                    key={index} 
+                    nome={item} 
+                    codigo={gerarCodigo()} 
+                    empresa={empresa} 
+                    mostrarBotao={false}
+                    /> ))}
+                
+                <ButtonContainer title='Exportar Tudo' onClick={() => console.log(reflist)}/>
+            </>
         )}
 
+        
+
         </div>
+        </Provider>
         
     );
 }
