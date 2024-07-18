@@ -92,14 +92,6 @@ function FormContainer({onClick}){
         console.log(listaDepedentes)
     }
 
-    // const changeDepedenteValue = (event, id) => {
-    //     const updatedDependentes = listaDepedentes.map((item) => {
-    //         item.id === id ? {...item, value: event.target.value} : item
-    //     })
-
-    //     setListaDepedentes(updatedDependentes)
-    // }
-
     const changeDepedenteValue = (event, id) => {
         const updatedDependentes = listaDepedentes.map((item) =>
           item.id === id ? { ...item, value: event.target.value } : item
