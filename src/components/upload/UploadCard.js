@@ -47,6 +47,7 @@ function UploadCard(){
         { value: 'Colégio Santa Úrsula', label: 'Colégio Santa Úrsula'},
         { value: 'Sindhal', label: 'Sindhal'},
         { value: 'UPM', label:'UPM'},
+        { value: 'Sindprev', label:'Sindprev'},
     ]
 
     const tratarDadosDaPlanilha = () => {
