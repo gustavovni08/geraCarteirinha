@@ -60,6 +60,7 @@ function GeraCarteirinhaIndividual(){
             nome={nome}
             codigo={codigo}
             empresa={empresa}
+            mostrarBotao={true}
             />
 
             {
