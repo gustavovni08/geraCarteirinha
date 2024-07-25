@@ -61,6 +61,8 @@ function FormContainer({onClick}){
         { value: 'Sindprev', label:'Sindprev'},
         { value: 'Assomal', label:'Assomal'},
         { value: 'Bali', label:'Bali'},
+        { value: 'OdontoShopping', label:'OdontoShopping'}
+        ,
         
     ]
 
