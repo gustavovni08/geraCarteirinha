@@ -110,6 +110,7 @@ const BusinessCard = React.forwardRef((props, ref) => {
                     <LogoImg src={require(`../../assets/${empresa}.png`)} alt='logo'/>
                 </LogoContainer>
                 <LogoContainer/>
+                <text>Central de Agendamento: (82) 99935-3701</text>
             </CardContainer>
 
             {mostrarBotao === true && (
