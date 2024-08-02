@@ -1,10 +1,9 @@
 import React, {useRef } from 'react';
-import { useEffect } from 'react';
 import card from '../../assets/BusinessCard.png'
 import styled from 'styled-components'
 import ButtonContainer from '../utils/ButtonContainer'
 import html2canvas from 'html2canvas';
-import { useRefContext } from '../../services/context';
+
 
 
 const MainContainer = styled.div`
@@ -75,7 +74,6 @@ const BusinessCard = React.forwardRef((props, ref) => {
     
     const { nome, codigo, empresa, mostrarBotao } = props;
     const cardRef = useRef(null);
-    const {setReflist, reflist} = useRefContext()
 
 
     const handleDownload = async () => {
@@ -96,9 +94,6 @@ const BusinessCard = React.forwardRef((props, ref) => {
         }
     }
 
-    useEffect(()=>{
-        console.log(reflist)
-    }, [])
 
     return(
         <MainContainer>

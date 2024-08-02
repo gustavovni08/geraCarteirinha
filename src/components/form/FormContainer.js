@@ -59,6 +59,8 @@ function FormContainer({onClick}){
         { value: 'Alparque', label:'Alparque'},
         { value: 'UPM', label:'UPM'},
         { value: 'Sindprev', label:'Sindprev'},
+        { value: 'Assomal', label:'Assomal'},
+        { value: 'Bali', label:'Bali'},
         { value: 'OdontoShopping', label:'OdontoShopping'}
         ,
         
