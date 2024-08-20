@@ -25,7 +25,7 @@ const LabelContainer = styled.div`
 
 function InputContainer(props){
 
-    const {label, placeholder, value, onChange} = props
+    const {label, placeholder, value, onChange, type} = props
 
     return(
         <MainContainer>
@@ -35,6 +35,7 @@ function InputContainer(props){
             <StyledInput
             placeholder={placeholder}
             value={value}
+            type={type || 'text'}
             onChange={onChange}/>
         </MainContainer>
         

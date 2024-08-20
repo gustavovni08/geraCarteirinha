@@ -19,7 +19,7 @@ function GeraCarteirinhaIndividual(){
 
             setNome(newNome.toUpperCase())
             setCodigo(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000)
-            setCard(formData.tipo)
+            setCard(formData.plano)
             setEmpresa(formData.empresa)
             setLista(formData.listaDepedentes)
             console.log(formData)
@@ -29,7 +29,7 @@ function GeraCarteirinhaIndividual(){
     }
 
     useEffect(() => {
-        console.log(showCard)
+        console.log(showCard, card)
     }, [showCard])
     return(
         <div>

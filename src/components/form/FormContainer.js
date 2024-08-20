@@ -41,7 +41,7 @@ function FormContainer({onClick}){
     const [empresa, setEmpresa] = useState('SELECIONE')
     const [qtdDepedentes, setQtdDepedentes] = useState('SELECIONE')
     const [listaDepedentes, setListaDepedentes] = useState([])
-
+    const [dataNascimento, setDataNascimento] = useState()
     
     const options = [
         { value: 'Individual', label: 'Individual'},
@@ -110,12 +110,25 @@ function FormContainer({onClick}){
 
         const formData = {
             nome,
-            cpf,
             email,
-            telefone,
+            senha: cpf,
+            cpf,
+            cep: null,
+            cidade: null,
+            bairro: null,
+            logadouro: null,
+            numero_logadouro: null,
+            data_nascimento: dataNascimento,
+            status: 1,
             plano: tipo,
+            telefone,
         }
         
+        try{
+            await api.post('/adicionarAssociado', formData)
+        }catch(error){
+            window.alert('Dados já registrados ou inválidos')
+        }
         onClick(formData)
     }
 
@@ -123,7 +136,7 @@ function FormContainer({onClick}){
         <MainContainer>
             <FormCard>
                 <InputContainer
-                required
+                placeholder="Digite o nome do associado"
                 label="Nome"
                 value={nome}
                 onChange={(event) => (setNome(event.target.value))}
@@ -145,8 +158,17 @@ function FormContainer({onClick}){
 
                 <InputContainer
                 label="Email"
+                placeholder="email@email.com.br"
                 value={email}
                 onChange={(event) => (setEmail(event.target.value))}
+                />
+
+                <InputContainer
+                label="Data de Nascimento"
+                placeholder="DD/MM/AAAA"
+                type="date"
+                value={dataNascimento}
+                onChange={(event) => (setDataNascimento(event.target.value))}
                 />
 
                 <SelectContainer

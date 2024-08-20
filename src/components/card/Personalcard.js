@@ -103,7 +103,7 @@ function PersonalCard(props){
                             <ImageContainer src={card} alt='hbcard'/>
                             <NomeLabel>{nome}</NomeLabel>
                             <CodeLabel>{codigo}</CodeLabel>
-                            <text style={{fontHeight:'bold'}}>Central de Agendamento: (82) 99935-3701</text>
+                            <p style={{fontHeight:'bold'}}>Central de Agendamento: (82) 99935-3701</p>
                         </CardContainer>
                         
                         <ButtonContainer title='Download' onClick={handleDownload}/>
@@ -120,7 +120,7 @@ function PersonalCard(props){
                     <LogoImg src={require(`../../assets/${empresa}.png`)} alt='logo'/>
                 </LogoContainer>
                 <LogoContainer/>
-                <text style={{fontHeight:'bold'}}>Central de Agendamento: (82) 99935-3701</text>
+                <p style={{fontHeight:'bold'}}>Central de Agendamento: (82) 99935-3701</p>
             </CardContainer>
             
             <ButtonContainer title='Download' onClick={handleDownload}/>
