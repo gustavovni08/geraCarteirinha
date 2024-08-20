@@ -3,6 +3,7 @@ import SelectContainer from "../form/SelectContainer"
 import InputContainer from "./InputContainer"
 import { useState } from "react"
 import ButtonContainer from "../utils/ButtonContainer"
+import api from "../../services/api"
 
 const MainContainer = styled.div`
     display:flex;
@@ -104,7 +105,7 @@ function FormContainer({onClick}){
         setListaDepedentes(updatedDependentes);
       };
 
-    const retornarDadosDoFormulario = () => {
+    const retornarDadosDoFormulario = async () => {
 
 
         const formData = {
@@ -112,11 +113,9 @@ function FormContainer({onClick}){
             cpf,
             email,
             telefone,
-            tipo,
-            empresa,
-            listaDepedentes
+            plano: tipo,
         }
-        // console.log(formData)
+        
         onClick(formData)
     }
 
@@ -124,6 +123,7 @@ function FormContainer({onClick}){
         <MainContainer>
             <FormCard>
                 <InputContainer
+                required
                 label="Nome"
                 value={nome}
                 onChange={(event) => (setNome(event.target.value))}

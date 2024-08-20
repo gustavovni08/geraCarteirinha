@@ -1,7 +1,7 @@
 import PersonalCard from "../components/card/Personalcard"
 import BusinessCard from "../components/card/BusinessCard"
 import FormContainer from "../components/form/FormContainer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function GeraCarteirinhaIndividual(){
 
@@ -23,10 +23,14 @@ function GeraCarteirinhaIndividual(){
             setEmpresa(formData.empresa)
             setLista(formData.listaDepedentes)
             console.log(formData)
-            // console.log(nome, lista, card, empresa)
+            console.log(nome, lista, card, empresa)
             setShowCard(true)
             
     }
+
+    useEffect(() => {
+        console.log(showCard)
+    }, [showCard])
     return(
         <div>
         {!showCard && <FormContainer onClick={gerarCarteirinha}/>}
