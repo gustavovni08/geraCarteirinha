@@ -8,7 +8,7 @@ function GeraCarteirinhaIndividual(){
     const [nome, setNome] = useState('')
     const [codigo, setCodigo] = useState('')
     const [card, setCard] = useState('Individual')
-    const [empresa, setEmpresa] = useState('')
+    const [convenio, setConvenio] = useState('')
     const [showCard, setShowCard] = useState(false)
     const [lista, setLista] = useState([])
 
@@ -20,24 +20,24 @@ function GeraCarteirinhaIndividual(){
             setNome(newNome.toUpperCase())
             setCodigo(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000)
             setCard(formData.plano)
-            setEmpresa(formData.empresa)
+            setConvenio(formData.convenio)
             setLista(formData.listaDepedentes)
             console.log(formData)
-            console.log(nome, lista, card, empresa)
+            console.log(nome, lista, card, convenio)
             setShowCard(true)
             
     }
 
     useEffect(() => {
-        console.log(showCard, card)
-    }, [showCard])
+        console.log(showCard, card, convenio)
+    }, [showCard, convenio])
     return(
         <div>
         {!showCard && <FormContainer onClick={gerarCarteirinha}/>}
         {showCard && card === 'Individual' && <PersonalCard nome={nome} codigo={codigo}/>}
-        {showCard && card === 'Empresarial' &&  empresa !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={empresa} mostrarBotao={true}/>}
-        {showCard && card === 'Empresarial' &&  empresa === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={empresa}/>}
-        {showCard && card === 'Familiar' && empresa === 'SELECIONE' && (
+        {showCard && card === 'Empresarial' &&  convenio !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={convenio} mostrarBotao={true}/>}
+        {showCard && card === 'Empresarial' &&  convenio === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={convenio}/>}
+        {showCard && card === 'Familiar' && convenio === 'SELECIONE' && (
             <>
             <PersonalCard
             nome={nome}
@@ -58,12 +58,12 @@ function GeraCarteirinhaIndividual(){
             }
             </>
         )}
-        {showCard && card === 'Familiar' && empresa !== 'SELECIONE' && empresa !== 'Sindprev' && (
+        {showCard && card === 'Familiar' && convenio !== 'SELECIONE' && convenio !== 'Sindprev' && (
             <>
             <BusinessCard
             nome={nome}
             codigo={codigo}
-            empresa={empresa}
+            empresa={convenio}
             mostrarBotao={true}
             />
 
@@ -75,7 +75,7 @@ function GeraCarteirinhaIndividual(){
                             <BusinessCard
                             nome={item.value}
                             codigo={codigo+index+1}
-                            empresa={empresa}
+                            empresa={convenio}
                             mostrarBotao={true}
                             />
                         )
@@ -84,12 +84,12 @@ function GeraCarteirinhaIndividual(){
 
             </>
         )}
-        {showCard && card === 'Familiar' && empresa !== 'SELECIONE' && empresa === 'Sindprev' && (
+        {showCard && card === 'Familiar' && convenio !== 'SELECIONE' && convenio === 'Sindprev' && (
             <>
             <PersonalCard
             nome={nome}
             codigo={codigo}
-            empresa={empresa}
+            empresa={convenio}
             />
 
             {
@@ -100,7 +100,7 @@ function GeraCarteirinhaIndividual(){
                             <PersonalCard
                             nome={item.value}
                             codigo={codigo+index+1}
-                            empresa={empresa}
+                            empresa={convenio}
                             />
                         )
                     })

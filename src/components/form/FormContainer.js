@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import SelectContainer from "../form/SelectContainer"
+import SelectContainer from "./SelectContainer"
 import InputContainer from "./InputContainer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ButtonContainer from "../utils/ButtonContainer"
 import api from "../../services/api"
 
@@ -107,7 +107,10 @@ function FormContainer({onClick}){
 
     const retornarDadosDoFormulario = async () => {
 
-
+        if(!nome || !email || !cpf || !telefone || !dataNascimento){
+            window.alert('Preencha todos os campos')
+            return
+        }
         const formData = {
             nome,
             email,
@@ -122,8 +125,9 @@ function FormContainer({onClick}){
             status: 1,
             plano: tipo,
             telefone,
+            convenio: empresa || '',
         }
-        
+        console.log(formData)
         try{
             await api.post('/adicionarAssociado', formData)
         }catch(error){
