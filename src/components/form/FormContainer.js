@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import SelectContainer from "./SelectContainer"
 import InputContainer from "./InputContainer"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ButtonContainer from "../utils/ButtonContainer"
 import api from "../../services/api"
 
@@ -14,7 +14,7 @@ const MainContainer = styled.div`
     padding:30px;
 `
 
-const FormCard = styled.div`
+const FormCard = styled.div `
 
     display:flex;
     align-items: center;
@@ -42,6 +42,9 @@ function FormContainer({onClick}){
     const [qtdDepedentes, setQtdDepedentes] = useState('SELECIONE')
     const [listaDepedentes, setListaDepedentes] = useState([])
     const [dataNascimento, setDataNascimento] = useState()
+    const [vendedor, setVendedor] = useState('Júlio')
+    const [formaPagamento, setFormaPagamento] = useState('BOLETO')
+    const [vencimento, setVencimento] = useState('5')
     
     const options = [
         { value: 'Individual', label: 'Individual'},
@@ -62,10 +65,38 @@ function FormContainer({onClick}){
         { value: 'Sindprev', label:'Sindprev'},
         { value: 'Assomal', label:'Assomal'},
         { value: 'Bali', label:'Bali'},
-        { value: 'OdontoShopping', label:'OdontoShopping'}
-        ,
+        { value: 'OdontoShopping', label:'OdontoShopping'},
+        { value: 'PuraAgua', label:'Pura Agua'},
+        { value: 'Pele', label:'Pele'},
         
     ]
+
+    const formasPagamento = [
+        { value: 'Boleto', label: 'Boleto'},
+        { value: 'Cartão', label: 'Cartão'},
+    ]
+
+    const vencimentos = [
+        { value: '5', label: '5'},
+        { value: '10', label: '10'},
+        { value: '15', label: '15'},
+        { value: '20', label: '20'},
+        { value: '25', label: '25'},
+        { value: '30', label: '30'},
+    ]
+
+    const vendedores = [
+        { value: 'Júlio', label: 'Júlio'},
+        { value: 'Daniel', label: 'Daniel'},
+        { value: 'Andréia', label: 'Andréria'},
+        { value: 'Ana', label: 'Ana'},
+        { value: 'Janaína', label: 'Janaína'},
+        { value: 'Patrícia', label: ' Patrícia'},
+        { value: 'Diego', label: 'Diego'},
+        { value: 'Deya', label: 'Deya'},
+    ]
+
+
 
     const multiplier = [
         {value: 0, label: 'SELECIONE'},
@@ -126,6 +157,9 @@ function FormContainer({onClick}){
             plano: tipo,
             telefone,
             convenio: empresa || '',
+            vendedor,
+            forma_pagamento: formaPagamento,
+            vencimento
         }
         console.log(formData)
         try{
@@ -173,6 +207,28 @@ function FormContainer({onClick}){
                 type="date"
                 value={dataNascimento}
                 onChange={(event) => (setDataNascimento(event.target.value))}
+                />
+                
+
+                <SelectContainer
+                label='Vendedor'
+                value={vendedor}
+                options={vendedores}
+                onChange={(event) => (setVendedor(event.target.value))}
+                />
+
+                <SelectContainer
+                label='Forma de Pagamento'
+                value={formaPagamento}
+                options={formasPagamento}
+                onChange={(event) => (setFormaPagamento(event.target.value))}
+                />
+
+                <SelectContainer
+                label='Vencimento'
+                value={vencimento}
+                options={vencimentos}
+                onChange={(event) => (setVencimento(event.target.value))}
                 />
 
                 <SelectContainer
