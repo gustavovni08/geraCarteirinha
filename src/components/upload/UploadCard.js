@@ -31,7 +31,7 @@ function UploadCard(){
     const [lista, setLista] = useState([])
     const [show, setShow] = useState(false)
    
-    const {reflist, setReflist} = useRefContext()
+    // const {reflist, setReflist} = useRefContext()
 
 
     const options = [
@@ -48,6 +48,7 @@ function UploadCard(){
         { value: 'Sindhal', label: 'Sindhal'},
         { value: 'UPM', label:'UPM'},
         { value: 'Sindprev', label:'Sindprev'},
+        { value: 'Pele', label:'Pele'},
     ]
 
     const tratarDadosDaPlanilha = () => {
@@ -83,9 +84,9 @@ function UploadCard(){
         return codigo
     }
 
-    useEffect(()=>{
-        setReflist(lista)
-    }, [])
+    // useEffect(()=>{
+    //     setReflist(lista)
+    // }, [])
 
 
     return(
@@ -136,10 +137,10 @@ function UploadCard(){
                     nome={item} 
                     codigo={gerarCodigo()} 
                     empresa={empresa} 
-                    mostrarBotao={false}
+                    mostrarBotao={true}
                     /> ))}
                 
-                <ButtonContainer title='Exportar Tudo' onClick={() => console.log(reflist)}/>
+                {/* <ButtonContainer title='Exportar Tudo' onClick={() => console.log(reflist)}/> */}
             </>
         )}
 

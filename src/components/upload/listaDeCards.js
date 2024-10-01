@@ -17,10 +17,10 @@ function listaDeCards(props) {
                     nome={item} 
                     codigo={gerarCodigo()} 
                     empresa={empresa} 
-                    mostrarBotao={false}
+                    mostrarBotao={true}
                 /> ))}
                 
-            <ButtonContainer title='Exportar Tudo' onClick={() => console.log(listaDeRefs)}/>
+           {/* <ButtonContainer title='Exportar Tudo' onClick={() => console.log(listaDeRefs)}/> */}
         </div>
     )
 }
