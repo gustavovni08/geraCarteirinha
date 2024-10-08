@@ -49,6 +49,7 @@ function UploadCard(){
         { value: 'UPM', label:'UPM'},
         { value: 'Sindprev', label:'Sindprev'},
         { value: 'Pele', label:'Pele'},
+        { value: 'Sindfal', label:'Sindfal'},
     ]
 
     const tratarDadosDaPlanilha = () => {

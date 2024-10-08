@@ -68,7 +68,7 @@ function FormContainer({onClick}){
         { value: 'OdontoShopping', label:'OdontoShopping'},
         { value: 'PuraAgua', label:'Pura Agua'},
         { value: 'Pele', label:'Pele'},
-        
+        { value: 'Sindfal', label:'Sindfal'},
     ]
 
     const formasPagamento = [
