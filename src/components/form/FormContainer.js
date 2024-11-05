@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import SelectContainer from "./SelectContainer"
 import InputContainer from "./InputContainer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ButtonContainer from "../utils/ButtonContainer"
 import api from "../../services/api"
+import axios from "axios"
 
 const MainContainer = styled.div`
     display:flex;
@@ -39,36 +40,19 @@ function FormContainer({onClick}){
     const [telefone, setTelefone] = useState('')
     const [tipo, setTipo] = useState('Individual')
     const [empresa, setEmpresa] = useState('SELECIONE')
+    const [empresas, setEmpresas] = useState([])
     const [qtdDepedentes, setQtdDepedentes] = useState('SELECIONE')
     const [listaDepedentes, setListaDepedentes] = useState([])
     const [dataNascimento, setDataNascimento] = useState()
     const [vendedor, setVendedor] = useState('Júlio')
     const [formaPagamento, setFormaPagamento] = useState('BOLETO')
     const [vencimento, setVencimento] = useState('5')
+    const [link, setLink] = useState('')
     
     const options = [
         { value: 'Individual', label: 'Individual'},
         { value: 'Familiar', label: 'Familiar'},
         { value: 'Empresarial', label: 'Empresarial'},
-    ]
-
-    const Empresas = [
-        { value: 'SELECIONE', label:'SELECIONE'},
-        { value: 'Veloo', label: 'Veloo'},
-        { value: 'Itelx', label: 'Itelx'},
-        { value: 'MaisTV', label: 'MaisTV'},
-        { value: 'Sitramico', label: 'Sitramico'},
-        { value: 'Colégio Santa Úrsula', label: 'Colégio Santa Úrsula'},
-        { value: 'Sindhal', label: 'Sindhal'},
-        { value: 'Alparque', label:'Alparque'},
-        { value: 'UPM', label:'UPM'},
-        { value: 'Sindprev', label:'Sindprev'},
-        { value: 'Assomal', label:'Assomal'},
-        { value: 'Bali', label:'Bali'},
-        { value: 'OdontoShopping', label:'OdontoShopping'},
-        { value: 'PuraAgua', label:'Pura Agua'},
-        { value: 'Pele', label:'Pele'},
-        { value: 'Sindfal', label:'Sindfal'},
     ]
 
     const formasPagamento = [
@@ -95,8 +79,6 @@ function FormContainer({onClick}){
         { value: 'Diego', label: 'Diego'},
         { value: 'Deya', label: 'Deya'},
     ]
-
-
 
     const multiplier = [
         {value: 0, label: 'SELECIONE'},
@@ -159,7 +141,8 @@ function FormContainer({onClick}){
             convenio: empresa || '',
             vendedor,
             forma_pagamento: formaPagamento,
-            vencimento
+            vencimento,
+            link
         }
         console.log(formData)
         try{
@@ -169,6 +152,40 @@ function FormContainer({onClick}){
         }
         onClick(formData)
     }
+
+    async function getConvenios(){
+        try{
+            const {data} = await axios.get("https://api.hbcard.com.br/convenios")
+            console.log(data.response)
+            return data.response
+        } catch (error) {
+            console.error(error)
+        }
+    
+    }
+
+    useEffect(() => {
+        
+        const getData = async () => {
+           const convenios = await getConvenios()
+            let iteredConvenios = []
+            convenios.forEach((item) => {
+                const convenio = {
+                    value: item.nome,
+                    label: item.nome,
+                    link: item.link
+                }
+                console.log(iteredConvenios)
+                iteredConvenios.push(convenio)
+            })
+
+            setEmpresas(iteredConvenios)
+
+        }
+
+        getData()
+
+    }, [])
 
     return(
         <MainContainer>
@@ -243,8 +260,11 @@ function FormContainer({onClick}){
                     <SelectContainer 
                     label='Convênio'
                     value={empresa}
-                    options={Empresas}
-                    onChange={(event) => (setEmpresa(event.target.value))}/>
+                    options={empresas}
+                    onChange={(event) => {
+                        console.log(event.target.value)
+                        setEmpresa(event.target.value)
+                    }}/>
 
                     <SelectContainer
                     label='N° Depedentes'
@@ -277,8 +297,18 @@ function FormContainer({onClick}){
                 <SelectContainer 
                 label='Convênio'
                 value={empresa}
-                options={Empresas}
-                onChange={(event) => (setEmpresa(event.target.value))}
+                options={empresas}
+                onChange={(event) => {
+                        console.log(event.target.value)
+                        console.log(empresas)
+                        empresas.forEach((item) => {
+                            if(item.label === event.target.value){
+                                console.log(item.link)
+                                setLink(item.link)
+                            }
+                        })
+                        setEmpresa(event.target.value)
+                    }}
                 />}
 
                 <ButtonContainer

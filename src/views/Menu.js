@@ -19,6 +19,9 @@ function Menu(){
             <MenuCard
             title="Em Lote"
             navigate="emLote"/>
+            <MenuCard
+            title="Adicionar"
+            navigate="Adicionar"/>
         </MainContainer>
         
     )

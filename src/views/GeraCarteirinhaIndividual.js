@@ -11,6 +11,7 @@ function GeraCarteirinhaIndividual(){
     const [convenio, setConvenio] = useState('')
     const [showCard, setShowCard] = useState(false)
     const [lista, setLista] = useState([])
+    const [link, setLink] = useState()
 
     const gerarCarteirinha = (formData) => {
 
@@ -22,6 +23,7 @@ function GeraCarteirinhaIndividual(){
             setCard(formData.plano)
             setConvenio(formData.convenio)
             setLista(formData.listaDepedentes)
+            setLink(formData.link)
             console.log(formData)
             console.log(nome, lista, card, convenio)
             setShowCard(true)
@@ -35,8 +37,8 @@ function GeraCarteirinhaIndividual(){
         <div>
         {!showCard && <FormContainer onClick={gerarCarteirinha}/>}
         {showCard && card === 'Individual' && <PersonalCard nome={nome} codigo={codigo}/>}
-        {showCard && card === 'Empresarial' &&  convenio !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={convenio} mostrarBotao={true}/>}
-        {showCard && card === 'Empresarial' &&  convenio === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={convenio}/>}
+        {showCard && card === 'Empresarial' &&  convenio !== 'Sindprev' && <BusinessCard nome={nome} codigo={codigo} empresa={convenio} mostrarBotao={true} link={link}/>}
+        {showCard && card === 'Empresarial' &&  convenio === 'Sindprev' && <PersonalCard nome={nome} codigo={codigo} empresa={convenio} link={link}/>}
         {showCard && card === 'Familiar' && convenio === 'SELECIONE' && (
             <>
             <PersonalCard
@@ -77,6 +79,7 @@ function GeraCarteirinhaIndividual(){
                             codigo={codigo+index+1}
                             empresa={convenio}
                             mostrarBotao={true}
+                            link={link}
                             />
                         )
                     })
