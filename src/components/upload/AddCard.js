@@ -3,6 +3,7 @@ import InputContainer from "../form/InputContainer";
 import { useState } from "react";
 import ButtonContainer from "../utils/ButtonContainer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UploadCardContainer = styled.div`
     display: flex;
@@ -19,14 +20,10 @@ const UploadCardContainer = styled.div`
     font-size: 22px;
 `;
 
-const NomeInputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    font-size: 22px;
-    font-weight: bold;
-`;
 
 function AddCard() {
+
+    const navigate = useNavigate()
     const [file, setFile] = useState(null);
     const [nome, setNome] = useState('');
 
@@ -51,6 +48,7 @@ function AddCard() {
 
             console.log('Upload feito com sucesso');
             window.alert("Upload feito com sucesso!");
+            navigate('/')
 
         } catch (error) {
             console.error("Erro no upload:", error);
